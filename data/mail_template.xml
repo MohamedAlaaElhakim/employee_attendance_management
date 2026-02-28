@@ -1,0 +1,110 @@
+<odoo>
+    
+    <!-- =====================================================
+         EMAIL TEMPLATE: Late Check-In Notification
+         ===================================================== -->
+    <record id="email_template_late_check_in" model="mail.template">
+        <field name="name">Late Check-In Notification</field>
+        <field name="model_id" ref="model_employee_attendance_record"/>
+        <field name="subject">⚠️ Late Arrival Notification - ${object.date}</field>
+        <field name="email_to">${object.employee_id.work_email or object.employee_id.user_id.email}</field>
+        <field name="body_html"><![CDATA[
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f8f9fa;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="color: #ff9800; margin: 0;">⚠️ Late Arrival Notice</h2>
+                    </div>
+                    
+                    <p style="font-size: 16px;">Dear <strong>${object.employee_id.name}</strong>,</p>
+                    
+                    <p style="font-size: 14px; line-height: 1.6; color: #555;">
+                        This is a friendly reminder that you checked in late today.
+                    </p>
+                    
+                    <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ff9800; margin: 20px 0;">
+                        <p style="margin: 5px 0;"><strong>Date:</strong> ${object.date}</p>
+                        <p style="margin: 5px 0;"><strong>Check-in Time:</strong> ${format_datetime(object.check_in, tz=user.tz, dt_format='short')}</p>
+                        <p style="margin: 5px 0;"><strong>Expected Time:</strong> 09:00 AM</p>
+                    </div>
+                    
+                    <p style="font-size: 14px; line-height: 1.6; color: #555;">
+                        Please try to arrive on time to maintain productivity and show commitment to your role.
+                        If you're experiencing difficulties with punctuality, please speak with your manager.
+                    </p>
+                    
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #888; font-size: 12px;">
+                        <p>Best regards,<br/><strong>HR Department</strong></p>
+                        <p style="margin-top: 10px;">This is an automated message. Please do not reply.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">${object.employee_id.user_id.lang}</field>
+    </record>
+
+    <!-- =====================================================
+         EMAIL TEMPLATE: Attendance Approved
+         ===================================================== -->
+    <record id="email_template_attendance_approved" model="mail.template">
+        <field name="name">Attendance Approved Notification</field>
+        <field name="model_id" ref="model_employee_attendance_record"/>
+        <field name="subject">✅ Attendance Approved - ${object.date}</field>
+        <field name="email_to">${object.employee_id.work_email or object.employee_id.user_id.email}</field>
+        <field name="body_html"><![CDATA[
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f8f9fa;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="color: #28a745; margin: 0;">✅ Attendance Approved</h2>
+                    </div>
+                    
+                    <p style="font-size: 16px;">Dear <strong>${object.employee_id.name}</strong>,</p>
+                    
+                    <p style="font-size: 14px; line-height: 1.6; color: #555;">
+                        Your attendance record has been approved by your manager.
+                    </p>
+                    
+                    <div style="background-color: #d4edda; padding: 15px; border-left: 4px solid #28a745; margin: 20px 0;">
+                        <p style="margin: 5px 0;"><strong>Date:</strong> ${object.date}</p>
+                        <p style="margin: 5px 0;"><strong>Check-in:</strong> ${format_datetime(object.check_in, tz=user.tz, dt_format='short') if object.check_in else 'N/A'}</p>
+                        <p style="margin: 5px 0;"><strong>Check-out:</strong> ${format_datetime(object.check_out, tz=user.tz, dt_format='short') if object.check_out else 'N/A'}</p>
+                        <p style="margin: 5px 0;"><strong>Worked Hours:</strong> ${'{:.2f}'.format(object.worked_hours)} hours</p>
+                    </div>
+                    
+                    <p style="font-size: 14px; line-height: 1.6; color: #555;">
+                        Thank you for your punctuality and dedication!
+                    </p>
+                    
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: #888; font-size: 12px;">
+                        <p>Best regards,<br/><strong>HR Department</strong></p>
+                        <p style="margin-top: 10px;">This is an automated message. Please do not reply.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+        <field name="lang">${object.employee_id.user_id.lang}</field>
+    </record>
+
+    <!-- =====================================================
+         EMAIL TEMPLATE: Daily Report to Managers
+         ===================================================== -->
+    <record id="attendance_daily_report" model="mail.template">
+        <field name="name">Daily Attendance Report</field>
+        <field name="model_id" ref="model_employee_attendance_record"/>
+        <field name="subject">Daily Attendance Report</field>
+        <field name="email_to">${object.env.user.email}</field>
+        <field name="body_html">
+            <![CDATA[
+            <h3>Attendance Summary</h3>
+            <p>Date: ${object.date}</p>
+            <p>Status: ${object.state}</p>
+            ]]>
+        </field>
+    </record>
+    <!-- ✅ FIX: Cron removed from here — already defined in attendance_cron.xml -->
+</odoo>

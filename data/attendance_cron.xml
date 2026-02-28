@@ -1,0 +1,22 @@
+<odoo>
+    <record id="ir_cron_mark_absent" model="ir.cron">
+        <field name="name">Mark Absent Employees</field>
+        <field name="model_id" ref="model_employee_attendance_record"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_mark_absent()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- ✅ NEW: Monthly Summary Cron -->
+    <record id="ir_cron_monthly_summary" model="ir.cron">
+        <field name="name">Generate Monthly Attendance Summary</field>
+        <field name="model_id" ref="model_employee_attendance_summary"/>
+        <field name="state">code</field>
+        <field name="code">model.generate_monthly_summary()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

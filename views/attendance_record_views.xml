@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- =====================================================
+         TREE VIEW
+         ===================================================== -->
+    <record id="view_attendance_record_tree" model="ir.ui.view">
+        <field name="name">attendance.record.tree</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <!-- ✅ FIX: إضافة decorations للألوان + sum للساعات -->
+            <tree string="Attendance Records"
+                  decoration-danger="state == 'absent'"
+                  decoration-warning="state == 'late'"
+                  decoration-success="state == 'approved'"
+                  decoration-info="state == 'present'">
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="worked_hours" sum="Total Hours"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         FORM VIEW
+         ===================================================== -->
+    <record id="view_attendance_record_form" model="ir.ui.view">
+        <field name="name">attendance.record.form</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Record">
+
+                <header>
+                    <field name="state"
+                           widget="statusbar"
+                           readonly="1"
+                           statusbar_visible="new,present,late,absent,approved"/>
+
+                    <button name="action_check_in"
+                            string="Check In"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'new'"/>
+
+                    <button name="action_check_out"
+                            string="Check Out"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state not in ('present','late')"/>
+
+                    <button name="%(employee_attendance_management.action_attendance_report)d"
+                            string="Print Attendance"
+                            type="action"
+                            class="btn-secondary"
+                            icon="fa-print"/>
+
+                    <button name="%(employee_attendance_management.action_attendance_approve_wizard)d"
+                            string="Approve"
+                            type="action"
+                            class="btn-success"
+                            groups="employee_attendance_management.group_attendance_manager"
+                            context="{'default_attendance_id': id}"
+                            invisible="state not in ('present','late')"/>
+                </header>
+
+                <!-- ===== BODY ===== -->
+                <sheet>
+
+                    <group>
+                        <group string="Employee Info">
+                            <field name="employee_id"/>
+                            <field name="date"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+
+                        <group string="Time Info">
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="break_start"/>
+                            <field name="break_end"/>
+                            <field name="break_hours" readonly="1"/>
+                            <field name="worked_hours" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="notes"/>
+                    </group>
+
+                </sheet>
+
+                <!-- ===== CHATTER ===== -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- =========================
+     SEARCH VIEW
+     ========================= -->
+    <record id="view_attendance_record_search" model="ir.ui.view">
+        <field name="name">attendance.record.search</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <search string="Search Attendance">
+
+                <!-- Quick search -->
+                <field name="employee_id"/>
+                <field name="date"/>
+
+                <!-- Filters -->
+                <filter name="filter_today"
+                        string="Today"
+                        domain="[('date','=',context_today())]"/>
+
+                <filter name="filter_present"
+                        string="Present"
+                        domain="[('state','=','present')]"/>
+
+                <filter name="filter_late"
+                        string="Late"
+                        domain="[('state','=','late')]"/>
+
+                <filter name="filter_absent"
+                        string="Absent"
+                        domain="[('state','=','absent')]"/>
+
+                <filter name="filter_approved"
+                        string="Approved"
+                        domain="[('state','=','approved')]"/>
+
+                <separator/>
+
+                <filter name="filter_this_month"
+                        string="This Month"
+                        domain="[('date','&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+
+                <filter name="filter_my_attendance"
+                        string="My Attendance"
+                        domain="[('employee_id','=',uid)]"/>
+
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter name="group_employee"
+                            string="Employee"
+                            context="{'group_by':'employee_id'}"/>
+                    <filter name="group_status"
+                            string="Status"
+                            context="{'group_by':'state'}"/>
+                    <filter name="group_date"
+                            string="Date"
+                            context="{'group_by':'date'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         KANBAN VIEW (Mobile-Friendly)
+         ===================================================== -->
+    <record id="view_attendance_record_kanban" model="ir.ui.view">
+        <field name="name">attendance.record.kanban</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="state"/>
+                <field name="worked_hours"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb8">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="employee_id"/>
+                                    </strong>
+                                    <div class="o_kanban_record_subtitle">
+                                        <i class="fa fa-calendar"/> <field name="date"/>
+                                    </div>
+                                </div>
+                                <span class="float-end">
+                                    <field name="state" widget="label_selection"
+                                          options="{'classes': {
+                                              'present': 'success', 
+                                              'late': 'warning', 
+                                              'absent': 'danger', 
+                                              'approved': 'info',
+                                              'new': 'secondary'
+                                          }}"/>
+                                </span>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <t t-if="record.check_in.raw_value">
+                                    <div>
+                                        <i class="fa fa-sign-in text-success"/> 
+                                        In: <field name="check_in" widget="datetime"/>
+                                    </div>
+                                </t>
+                                <t t-if="record.check_out.raw_value">
+                                    <div>
+                                        <i class="fa fa-sign-out text-danger"/> 
+                                        Out: <field name="check_out" widget="datetime"/>
+                                    </div>
+                                </t>
+                                <div class="mt8">
+                                    <strong>
+                                        <i class="fa fa-clock-o"/> 
+                                        <field name="worked_hours" widget="float_time"/> hours
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         CALENDAR VIEW
+         ===================================================== -->
+    <record id="view_attendance_record_calendar" model="ir.ui.view">
+        <field name="name">attendance.record.calendar</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <calendar string="Attendance Calendar"
+                      date_start="date"
+                      color="employee_id">
+                <field name="employee_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         GRAPH VIEW
+         ===================================================== -->
+    <record id="view_attendance_record_graph" model="ir.ui.view">
+        <field name="name">attendance.record.graph</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <graph string="Attendance Analysis" type="bar">
+                <field name="employee_id" type="row"/>
+                <field name="worked_hours" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         PIVOT VIEW
+         ===================================================== -->
+    <record id="view_attendance_record_pivot" model="ir.ui.view">
+        <field name="name">attendance.record.pivot</field>
+        <field name="model">employee.attendance.record</field>
+        <field name="arch" type="xml">
+            <pivot string="Attendance Analysis">
+                <field name="employee_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="worked_hours" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- =====================================================
+         ACTION
+         ===================================================== -->
+    <record id="action_attendance_record" model="ir.actions.act_window">
+        <field name="name">Attendance Records</field>
+        <field name="res_model">employee.attendance.record</field>
+        <!-- ✅ FIX: إضافة kanban و graph و pivot للـ views -->
+        <field name="view_mode">kanban,calendar,tree,form,graph,pivot</field>
+        <field name="search_view_id" ref="view_attendance_record_search"/>
+        <field name="context">{'search_default_filter_today': 1}</field>
+    </record>
+
+    <!-- =====================================================
+         MENU
+         ===================================================== -->
+    <menuitem id="menu_attendance_root"
+              name="Attendance"
+              sequence="20"/>
+
+    <menuitem id="menu_attendance_records"
+              name="Attendance Records"
+              parent="menu_attendance_root"
+              action="action_attendance_record"
+              sequence="10"/>
+
+</odoo>
