@@ -108,7 +108,8 @@
     <record id="att_demo_today_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="DateTime.today().strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="DateTime.now().replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="DateTime.now().replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">present</field>
         <field name="notes">On time as usual</field>
     </record>
@@ -117,8 +118,10 @@
     <record id="att_demo_today_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="DateTime.today().strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="DateTime.now().replace(hour=9, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="DateTime.now().replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="DateTime.now().replace(hour=9, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="DateTime.now().replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
         <field name="notes">Traffic delay</field>
     </record>
@@ -127,9 +130,12 @@
     <record id="att_demo_today_khaled" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_3"/>
         <field name="date" eval="DateTime.today().strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="DateTime.now().replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_start" eval="DateTime.now().replace(hour=12, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_end" eval="DateTime.now().replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="DateTime.now().replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_start"
+               eval="DateTime.now().replace(hour=12, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_end"
+               eval="DateTime.now().replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">present</field>
         <field name="notes">1 hour lunch break</field>
     </record>
@@ -139,7 +145,8 @@
         <field name="employee_id" ref="employee_demo_4"/>
         <field name="date" eval="DateTime.today().strftime('%Y-%m-%d')"/>
         <field name="check_in" eval="DateTime.now().replace(hour=9, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="DateTime.now().replace(hour=14, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="DateTime.now().replace(hour=14, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
         <field name="notes">Part-time: 5 hours</field>
     </record>
@@ -148,10 +155,14 @@
     <record id="att_demo_today_manager" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_manager"/>
         <field name="date" eval="DateTime.today().strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="DateTime.now().replace(hour=8, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_start" eval="DateTime.now().replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_end" eval="DateTime.now().replace(hour=13, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="DateTime.now().replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="DateTime.now().replace(hour=8, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_start"
+               eval="DateTime.now().replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_end"
+               eval="DateTime.now().replace(hour=13, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="DateTime.now().replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
         <field name="notes">Full day completed</field>
     </record>
@@ -164,8 +175,10 @@
     <record id="att_demo_yesterday_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=8, minute=50, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=17, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=8, minute=50, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=17, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
         <field name="notes">Worked 8.5 hours</field>
     </record>
@@ -174,8 +187,10 @@
     <record id="att_demo_yesterday_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=10, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=18, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=10, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=18, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
         <field name="notes">Late but compensated with extra hour</field>
     </record>
@@ -192,8 +207,10 @@
     <record id="att_demo_yesterday_nour" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_4"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=9, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=9, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=13, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
         <field name="notes">4 hours completed</field>
     </record>
@@ -202,8 +219,10 @@
     <record id="att_demo_yesterday_manager" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_manager"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=8, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=1)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=8, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=1)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
@@ -214,24 +233,30 @@
     <record id="att_demo_2days_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
     <record id="att_demo_2days_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
     <record id="att_demo_2days_khaled" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_3"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=9, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=2)).replace(hour=18, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=9, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=2)).replace(hour=18, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
         <field name="notes">Late - 15 minutes</field>
     </record>
@@ -243,10 +268,14 @@
     <record id="att_demo_3days_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=3)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=8, minute=40, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_start" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=12, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="break_end" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=13, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=8, minute=40, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_start"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=12, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="break_end"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=13, minute=15, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
         <field name="notes">Worked 7.6 hours (45 min break)</field>
     </record>
@@ -254,8 +283,10 @@
     <record id="att_demo_3days_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=3)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=9, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=17, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=9, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=17, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
         <field name="notes">Late arrival - personal appointment</field>
     </record>
@@ -263,8 +294,10 @@
     <record id="att_demo_3days_nour" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_4"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=3)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=9, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=3)).replace(hour=14, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=9, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=3)).replace(hour=14, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
@@ -276,24 +309,30 @@
     <record id="att_demo_lastweek_mon_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=8, minute=50, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=10, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=8, minute=50, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=10, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
     <record id="att_demo_lastweek_mon_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=8, minute=55, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
     <record id="att_demo_lastweek_mon_khaled" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_3"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=7)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=9, minute=5, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=9, minute=5, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=7)).replace(hour=17, minute=30, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
     </record>
 
@@ -301,16 +340,20 @@
     <record id="att_demo_lastweek_tue_ahmed" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_1"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=6)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=6)).replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=6)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=6)).replace(hour=8, minute=45, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=6)).replace(hour=17, minute=0, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">approved</field>
     </record>
 
     <record id="att_demo_lastweek_wed_sara" model="employee.attendance.record">
         <field name="employee_id" ref="employee_demo_2"/>
         <field name="date" eval="(DateTime.today() - relativedelta(days=5)).strftime('%Y-%m-%d')"/>
-        <field name="check_in" eval="(DateTime.now() - relativedelta(days=5)).replace(hour=9, minute=20, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
-        <field name="check_out" eval="(DateTime.now() - relativedelta(days=5)).replace(hour=17, minute=20, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_in"
+               eval="(DateTime.now() - relativedelta(days=5)).replace(hour=9, minute=20, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="check_out"
+               eval="(DateTime.now() - relativedelta(days=5)).replace(hour=17, minute=20, second=0).strftime('%Y-%m-%d %H:%M:%S')"/>
         <field name="state">late</field>
     </record>
 
@@ -320,5 +363,101 @@
         <field name="state">absent</field>
         <field name="notes">Unplanned absence</field>
     </record>
+
+
+    <!-- =====================================================
+     FEBRUARY 2026 - MORE REALISTIC DEMO DATA
+     (15 working days approx: skipping weekends roughly)
+     ===================================================== -->
+
+    <!-- Helper: February 2026 working days simulation (Sun-Thu approx) -->
+
+    <!-- Ahmed Hassan - mostly on time -->
+    <record id="att_feb_ahmed_1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_1"/>
+        <field name="date">2026-02-01</field>
+        <field name="check_in">2026-02-01 08:45:00</field>
+        <field name="check_out">2026-02-01 17:15:00</field>
+        <field name="state">present</field>
+    </record>
+
+    <record id="att_feb_ahmed_2" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_1"/>
+        <field name="date">2026-02-02</field>
+        <field name="check_in">2026-02-02 08:50:00</field>
+        <field name="check_out">2026-02-02 17:00:00</field>
+        <field name="state">present</field>
+    </record>
+
+    <record id="att_feb_ahmed_3" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_1"/>
+        <field name="date">2026-02-03</field>
+        <field name="check_in">2026-02-03 09:05:00</field>
+        <field name="check_out">2026-02-03 17:30:00</field>
+        <field name="state">late</field>
+        <field name="notes">Slight delay</field>
+    </record>
+
+    <!-- ... كرر نمط مشابه لأيام أخرى (مثلاً 4,5,8,9,10,11,15,16,17,18,22,23,24,25) -->
+
+    <!-- مثال ليوم غياب لأحمد -->
+    <record id="att_feb_ahmed_absent" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_1"/>
+        <field name="date">2026-02-09</field>
+        <field name="state">absent</field>
+        <field name="notes">Sick day</field>
+    </record>
+
+    <!-- Sara Mohamed - more lates + some absent -->
+    <record id="att_feb_sara_1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_2"/>
+        <field name="date">2026-02-01</field>
+        <field name="check_in">2026-02-01 09:20:00</field>
+        <field name="check_out">2026-02-01 17:45:00</field>
+        <field name="state">late</field>
+    </record>
+
+    <record id="att_feb_sara_absent" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_2"/>
+        <field name="date">2026-02-10</field>
+        <field name="state">absent</field>
+        <field name="notes">Personal leave</field>
+    </record>
+
+    <!-- Khaled Ali - mix + more absent -->
+    <record id="att_feb_khaled_1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_3"/>
+        <field name="date">2026-02-02</field>
+        <field name="check_in">2026-02-02 09:10:00</field>
+        <field name="check_out">2026-02-02 18:00:00</field>
+        <field name="state">late</field>
+    </record>
+
+    <record id="att_feb_khaled_absent1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_3"/>
+        <field name="date">2026-02-16</field>
+        <field name="state">absent</field>
+    </record>
+
+    <!-- Nour Ibrahim - part-time mostly approved -->
+    <record id="att_feb_nour_1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_4"/>
+        <field name="date">2026-02-03</field>
+        <field name="check_in">2026-02-03 09:00:00</field>
+        <field name="check_out">2026-02-03 14:00:00</field>
+        <field name="state">approved</field>
+        <field name="notes">Part-time day</field>
+    </record>
+
+    <!-- Yasser Mahmoud (Manager) - mostly approved, few lates -->
+    <record id="att_feb_yasser_1" model="employee.attendance.record">
+        <field name="employee_id" ref="employee_demo_manager"/>
+        <field name="date">2026-02-01</field>
+        <field name="check_in">2026-02-01 08:30:00</field>
+        <field name="check_out">2026-02-01 17:00:00</field>
+        <field name="state">approved</field>
+    </record>
+
+    <!-- أضف المزيد حسب الحاجة، مثلاً 10-15 سجل لكل موظف -->
 
 </odoo>
